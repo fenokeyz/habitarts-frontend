@@ -24,7 +24,9 @@ export default function TherapistPage() {
   // 📥 Fetch history
   useEffect(() => {
     const token = localStorage.getItem("token");
-    socketRef.current = io(process.env.NEXT_PUBLIC_API_URL!);
+    socketRef.current = io(process.env.NEXT_PUBLIC_API_URL!, {
+      transports: ["websocket"],
+    });
 
     // 🔹 Get current user (IMPORTANT)
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile`, {
