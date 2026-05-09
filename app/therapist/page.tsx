@@ -83,7 +83,13 @@ export default function TherapistPage() {
       role: "user",
       message: input,
       user_id: userId,
+      name: "You",
     };
+
+    // ⚡ Instantly show user's own message
+    setMessages(prev => [...prev, userMessage]);
+
+    setTimeout(scrollToBottom, 100);
 
     setInput("");
     setLoading(true);
@@ -110,6 +116,8 @@ export default function TherapistPage() {
       }
 
       inputRef.current?.focus();
+      // ⚡ Therapist reply comes through sockets
+      // so no manual setMessages needed here
 
       setTimeout(scrollToBottom, 100);
 
