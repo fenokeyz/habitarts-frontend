@@ -66,7 +66,7 @@ export default function TherapistPage() {
         const exists = prev.some(
           (m) =>
             m.message === msg.message &&
-            m.user_id === msg.user_id
+            m.role === msg.role
         );
 
         if (exists) return prev;
@@ -167,7 +167,9 @@ export default function TherapistPage() {
               <div className={`text-xs mb-1 ${msg.role === "assistant" ? "text-gray-400" : "text-white/80"}`}>
                 {msg.role === "assistant" ? "Therapist" : msg.name || "You"}
               </div>
-              {msg.message}
+              {msg.role === "assistant"
+                ? msg.message.replace(/^\[Therapist: Therapist\]\s*/i, "Therapist: ")
+                : msg.message}
             </div>
           ))}
 
