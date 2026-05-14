@@ -61,7 +61,19 @@ export default function TherapistPage() {
       });
 
     socketRef.current.on("new_message", (msg: any) => {
-      setMessages(prev => [...prev, msg]);
+      setMessages(prev => {
+        // prevent duplicate own messages
+        const exists = prev.some(
+          (m) =>
+            m.message === msg.message &&
+            m.user_id === msg.user_id
+        );
+
+        if (exists) return prev;
+
+        return [...prev, msg];
+      });
+
       setTimeout(scrollToBottom, 100);
     });
 
