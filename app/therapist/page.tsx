@@ -168,7 +168,7 @@ export default function TherapistPage() {
                 {msg.role === "assistant" ? "Therapist" : msg.name || "You"}
               </div>
               {msg.role === "assistant"
-                ? msg.message.replace(/^\[Therapist: Therapist\]\s*/i, "Therapist: ")
+                ? msg.message.replace(/^\[Therapist:\s*Therapist\]\s*/i, "")
                 : msg.message}
             </div>
           ))}
